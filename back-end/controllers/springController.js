@@ -21,11 +21,6 @@ router.get('/', async (req,res, next) => {
 
 });
 
-// router.get("/", (req, res)=>{
-//     res.send("HELLO");
-// })
-
-
 
 //Create hotspring route
 router.post('/', async (req, res) => {
@@ -47,51 +42,51 @@ router.post('/', async (req, res) => {
 });
 
 
-// //show hotspring route
-// router.get('/:id', async (req, res, next) => {
-//     try{
 
-//         const foundSpring = await Spring.findbyId(req.params.id);
-//         res.json({
-//             status: 200,
-//             data: foundSpring
-//         });
 
-//     }catch(err){
-//         console.log(err)
-//     }
-// });
 
-// //update hotspring route
-// router.put('/:id', async (req, res) => {
+//show hotspring route
+router.get('/:id', async (req, res) => {
+    try{
 
-//     try {
-//       const updatedSpring = await Spring.findByIdAndUpdate(req.params.id, req.body, {new: true});
-//       res.json({
-//         status: 200,
-//         data: updatedSpring
-//       });
-//     } catch(err){
-//       res.send(err)
-//     }
-//   });
+        const foundSpring = await Spring.findById(req.params.id);
+        res.json({
+            status: 200,
+            data: foundSpring
+        });
+
+    }catch(err){
+        console.log(err)
+    }
+});
+
+//update hotspring route
+router.put('/:id', async (req, res) => {
+
+    try {
+      const updatedSpring = await Spring.findByIdAndUpdate(req.params.id, req.body, {new: true});
+      res.json({
+        status: 200,
+        data: updatedSpring
+      });
+    } catch(err){
+      res.send(err)
+    }
+  });
   
   
-//   // Delete route
-//   router.delete('/:id', async (req, res) => {
+  // Delete route mine
+  router.delete('/:id', async (req, res) => {
   
-//     try {
-//        const deletedSpring = await Spring.findByIdAndRemove(req.params.id);
-//         res.json({
-//           status: 200,
-//           data: deletedSpring
-//         });
-//     } catch(err){
-//       res.send(err);
-//     }
-//   });
-  
-
-
+    try {
+       const deletedSpring = await Spring.findByIdAndRemove(req.params.id);
+        res.json({
+          status: 200,
+          data: deletedSpring
+        });
+    } catch(err){
+      res.send(err);
+    }
+  });
 
 module.exports = router;
