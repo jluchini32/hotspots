@@ -14,8 +14,13 @@ class App extends Component {
   }
   render(){
   return (
-    <div className="App"> Welcome to the HotSPots App
+    <div className="App"> Welcome to the HotSpots App
+<br></br>
+<button>Go To List of Hotsprings </button>
+<button>Add a new Hotspring</button>
     <MapContainer></MapContainer>
+
+   
     </div>
    );
   }
