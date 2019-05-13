@@ -16,18 +16,24 @@
 // }
 
 // showHotsprings = async () => {
-//     const springs = await fetch('http:localhost:9000/hotsprings')     
+//     const response = await fetch('http:localhost:9000/hotsprings');
+    
+//     if(response.status != 200){
+//         throw Error(response.statusText);
+
+//     }
+
 //     const parsedSprings = await result.json();
 //     console.log(parsedSprings)
 //     this.setState({
-//         hotsprings: parsedResult.name
+//         hotsprings: parsedResult.data
 //     })
 // }
 
 // render(){
-//     const hotspringList = this.state.hotsprings.map((hot) => {
+//     const hotspringList = this.state.hotsprings.map((hotsprings) => {
 //         return <div>
-//             <h2>Hotspings here</h2>
+//             <h1>Hotspings here</h1>
 //         </div>
         
 //         })

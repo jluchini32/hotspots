@@ -26,9 +26,7 @@ router.get('/', async (req,res, next) => {
 router.post('/', async (req, res) => {
 
     try{
-        console.log(req.body, 'this is req.body before')
         const newSpring = await Spring.create(req.body);
-        console.log(req.body, 'this is req.body after')    
         res.json({
             status: 200,
             data: newSpring
@@ -40,8 +38,6 @@ router.post('/', async (req, res) => {
 
     }
 });
-
-
 
 
 
@@ -60,6 +56,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+
 //update hotspring route
 router.put('/:id', async (req, res) => {
 
@@ -75,7 +72,7 @@ router.put('/:id', async (req, res) => {
   });
   
   
-  // Delete route mine
+  // Delete hotspring route 
   router.delete('/:id', async (req, res) => {
   
     try {
