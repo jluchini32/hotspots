@@ -15,9 +15,6 @@ class MapContainer extends Component {
   };
 
 
-  componentDidMount(){
-    console.log('COMPONENT DID MOUNT');
-}
 
 mapClick = ({x, y, lat, lng, event}) => {
   console.log(x, y, lat, lng, event)
