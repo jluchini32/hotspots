@@ -12,7 +12,7 @@ const springSchema = new mongoose.Schema({
         unique: true
     },
 
-    long: {
+    lng: {
         type: String,
         required: true,
         unique: true
