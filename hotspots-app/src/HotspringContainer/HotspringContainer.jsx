@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import HotSpringList from '../HotspringList/HotspringList';
+import HotSpringList from './HotspringList/HotspringList';
+import MapContainer from '../MapContainer/MapContainer'
 
 
 class HotspringContainer extends Component { 
@@ -17,7 +18,9 @@ class HotspringContainer extends Component {
     }
 
     showHotsprings = async () => {
-        const result = await fetch('http://localhost:9000/hotspots');
+
+        const hotspringURL = `http://localhost:9000/hotsprings`
+        const result =  await fetch(hotspringURL);  
     
         if(result.status != 200){
         throw Error(result.statusText);
@@ -34,19 +37,42 @@ class HotspringContainer extends Component {
     render(){
      
 
-    console.log(this.state)
+        const springList = this.state.hotsprings.map((ss) => {
+    return <div>
+        <h2>{ss.name} {ss.lat} {ss.long}</h2>
+    </div>
+    
+    })
+    return <div className="app">
 
-        return (
-            <div className="springContainer">
-           <HotspringList> {springList} </HotspringList>
+    {/* <div className="mapContainer">
+        <MapContainer hotsprings={this.state.hotsprings}></MapContainer>
+    </div> */}
+        <div className="springContainer">
+            {springList}
         </div>
-        
-    )
-
-
-    }
+    </div>
 }
+
+}
+
+//     console.log(this.state)
+
+//         return (
+//             <div className="springContainer">
+//            <HotSpringList>  {springList} </HotSpringList>
+//         </div>
+        
+//     )
+
+
+//     }
+// }
 
 
 
 export default HotspringContainer;
+
+
+
+
