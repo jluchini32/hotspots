@@ -18,21 +18,22 @@ class MapContainer extends Component {
 
   };
 
-mapClick = ({x, y, lat, lng, event}) => {
-  console.log(x, y, lat, lng, event)
+mapClick = ({lat, lng, event}) => {
+  console.log(lat, lng, event)
 }
 
   render() {
-    // const mapSTuff = this.props.hotsprings.map((ss) => {
-    //   return (
-    //        <Zebra
-    //         lat={ss.lat}
-    //         lng={ss.lng}
-    //         text="HOTSPRING!"
-    //       />
-    //   )
-    // })
-    
+   
+    const mapSTuff = this.props.hotsprings.map((ss) => {
+      return (
+           <Zebra
+            lat={ss.lat}
+            lng={ss.long}
+            text="HOTSPRING!"
+          />
+      )
+    })
+
     return (
       
       // Important! Always set the container height explicitly
@@ -45,12 +46,13 @@ mapClick = ({x, y, lat, lng, event}) => {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
-        {/* {mapSTuff} */}
-          <AnyReactComponent
+        {mapSTuff}
+    
+          {/* <AnyReactComponent
             lat={39.96}
             lng={-106.54}
             text="HOTSPRING"
-          />
+          /> */}
           
         </GoogleMapReact>
       </div>

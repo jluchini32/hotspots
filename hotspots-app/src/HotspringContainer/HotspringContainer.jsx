@@ -36,18 +36,17 @@ class HotspringContainer extends Component {
 
     render(){
      
-
         const springList = this.state.hotsprings.map((ss) => {
-    return <div>
-        <h2>{ss.name} {ss.lat} {ss.long}</h2>
-    </div>
+        return <div>
+            <h2>{ss.name} {ss.lat} {ss.long}</h2>
+        </div>
     
-    })
-    return <div className="app">
+        })
+        return <div className="app">
 
-    {/* <div className="mapContainer">
+    {/* <div className="mapContainer"> */}
         <MapContainer hotsprings={this.state.hotsprings}></MapContainer>
-    </div> */}
+    {/* </div>  */}
         <div className="springContainer">
             {springList}
         </div>
