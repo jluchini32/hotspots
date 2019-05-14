@@ -7,6 +7,13 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 require('./db/db');
 
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+    optionsSuccessStatus: 200
+}))
+
+
 
 app.use(morgan('short'));
 

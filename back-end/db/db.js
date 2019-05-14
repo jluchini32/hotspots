@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/hotspots", 
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/hotsprings", 
 {useNewUrlParser: true, 
 useCreateIndex: true,
 useFindAndModify: false});
