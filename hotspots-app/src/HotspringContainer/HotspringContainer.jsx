@@ -34,11 +34,32 @@ class HotspringContainer extends Component {
         })
     }
 
+    deleteHotspring = async (id, e) => {
+        console.log(id, ' this is id')
+        e.preventDefault();
+        try {
+
+        const deleteHotspring = await fetch(`http://localhost:9000/hotsprings/` + id, {
+            method: 'DELETE',
+        });
+        const deleteHotspringJson = await deleteHotspring.json();
+        this.setState({hotsprings: this.state.hotsprings.filter((spring, i) => spring._id !== id)}
+            
+        );
+    
+        } catch(err) {
+          console.log(err, ' error')
+        }
+      }
+
+
     render(){
      
         const springList = this.state.hotsprings.map((ss) => {
         return <div>
             <h2>{ss.name} {ss.lat} {ss.long}</h2>
+            <button>Edit</button>
+            <button onClick={this.deleteHotspring.bind(null, ss._id)}>Delete</button>
         </div>
     
         })
@@ -51,22 +72,10 @@ class HotspringContainer extends Component {
             {springList}
         </div>
     </div>
-}
+    }
 
 }
 
-//     console.log(this.state)
-
-//         return (
-//             <div className="springContainer">
-//            <HotSpringList>  {springList} </HotSpringList>
-//         </div>
-        
-//     )
-
-
-//     }
-// }
 
 
 
