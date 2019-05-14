@@ -18,9 +18,6 @@ class MapContainer extends Component {
 
   };
 
-mapClick = ({lat, lng, event}) => {
-  console.log(lat, lng, event)
-}
 
   render() {
    
@@ -40,7 +37,9 @@ mapClick = ({lat, lng, event}) => {
       <div id ="map-map" style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
         
-        onClick={this.mapClick}
+        onClick= {this.props.mapClick}
+        
+
 
           bootstrapURLKeys={{ key: 'AIzaSyAUT1km3OOHrzgj34IyIKudZZdoiHcre8g' }}
           defaultCenter={this.props.center}
@@ -55,6 +54,7 @@ mapClick = ({lat, lng, event}) => {
           /> */}
           
         </GoogleMapReact>
+
       </div>
     );
   }

@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import HotSpringList from './HotspringList/HotspringList';
 import MapContainer from '../MapContainer/MapContainer'
+import CreateHotspring from '../CreateHotspring/CreateHotspring';
 
 
 class HotspringContainer extends Component { 
     constructor(){
     super();
     this.state = {
-        hotsprings: []
+        hotsprings: [],
+    
+    modalShowing: false
     }
 }
 
+
+    mapClick = ({lat, lng, event}) => {
+        console.log(lat, lng, event)
+        console.log('hello')
+        this.setState({
+        modalShowing: true
+        })
+    }
 
     componentDidMount(){
     console.log('COMPONENT DID MOUNT');
@@ -34,6 +45,29 @@ class HotspringContainer extends Component {
         })
     }
 
+    addHotspring = async (springs, e) => {
+    
+        e.preventDefault();
+        console.log(springs)
+        try {
+          const createdHotspring = await fetch('http://localhost:9000/hotsprings', {
+            method: 'POST',
+            body: JSON.stringify(springs),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          const parsedResponse = await createdHotspring.json();
+          console.log(parsedResponse)
+          this.setState({hotsprings: [...this.state.hotsprings, parsedResponse.data]})
+    
+    
+        } catch(err){
+          console.log(err)
+        }
+      }
+
+
     deleteHotspring = async (id, e) => {
         console.log(id, ' this is id')
         e.preventDefault();
@@ -54,7 +88,7 @@ class HotspringContainer extends Component {
 
 
     render(){
-     
+     console.log(this.state, 'state right now')
         const springList = this.state.hotsprings.map((ss) => {
         return <div>
             <h2>{ss.name} {ss.lat} {ss.long}</h2>
@@ -65,9 +99,10 @@ class HotspringContainer extends Component {
         })
         return <div className="app">
 
-    {/* <div className="mapContainer"> */}
-        <MapContainer hotsprings={this.state.hotsprings}></MapContainer>
-    {/* </div>  */}
+
+        <MapContainer hotsprings={this.state.hotsprings} mapClick ={this.mapClick} ></MapContainer>
+        {this.state.modalShowing ? <CreateHotspring addHotspring={this.addHotspring} /> : null}
+ 
         <div className="springContainer">
             {springList}
         </div>
