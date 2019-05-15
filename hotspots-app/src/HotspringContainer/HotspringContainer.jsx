@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MapContainer from '../MapContainer/MapContainer'
 import CreateHotspring from '../CreateHotspring/CreateHotspring';
+// import EditHotspring from '../EditHotspring/EditHotspring';
 
 
 class HotspringContainer extends Component { 
@@ -28,6 +29,9 @@ mapClick = ({lat, lng, event}) => {
         })
 }
 
+closeModal = (e) => {
+  this.setState({ modalShowing: false })
+}
 
 componentDidMount(){
     console.log('COMPONENT DID MOUNT');
@@ -68,10 +72,33 @@ addHotspring = async (springs) => {
           console.log(parsedResponse)
           this.setState({hotsprings: [...this.state.hotsprings, parsedResponse.data]})
     
-    
         } catch(err){
           console.log(err)
         }
+}
+
+updateHotspring = async (id, e) => {
+        const response = await fetch(`http://localhost:9000/hotsprings/` + id, {
+          method: "PUT",
+          body: JSON.stringify(e),
+          headers: {
+              "Content-Type": "application/json"
+          }
+        })
+        const updatedHotspring = await response.json();
+        console.log(updatedHotspring);
+
+        if(response.status === 200){
+          console.log("update working")
+          this.setState({
+              hotsprings: this.state.hotsprings.map((eachSpring)=>{
+        if(eachSpring._id === id){
+          return updatedHotspring
+          }
+          return eachSpring
+          })
+        })
+      }
 }
 
 
@@ -81,7 +108,7 @@ deleteHotspring = async (id, e) => {
         try {
 
         const deleteHotspring = await fetch(`http://localhost:9000/hotsprings/` + id, {
-            method: 'DELETE',
+        method: 'DELETE',
         });
         const deleteHotspringJson = await deleteHotspring.json();
         this.setState({hotsprings: this.state.hotsprings.filter((spring, i) => spring._id !== id)}
@@ -94,9 +121,6 @@ deleteHotspring = async (id, e) => {
 }
 
 
-closeModal = (e) => {
-  this.setState({ modalShowing: false })
-}
 
 render(){
      console.log(this.state, 'state right now')
@@ -106,7 +130,7 @@ render(){
             <h2>{spring.name} </h2>
             <p>Latitude: {spring.lat} <br></br>
             Longitude: {spring.lng}</p>
-            <button>Edit</button>
+            {/* <button onClick={this.updateHotspring.bind(null, spring._id)}>Edit</button> */}
             <button onClick={this.deleteHotspring.bind(null, spring._id)}>Delete</button>
         </div>
     
