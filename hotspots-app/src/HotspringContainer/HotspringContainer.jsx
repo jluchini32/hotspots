@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import MapContainer from '../MapContainer/MapContainer'
 import CreateHotspring from '../CreateHotspring/CreateHotspring';
-// import EditHotspring from '../EditHotspring/EditHotspring';
+import ShowEachHotspring from '../ShowEachHotspring/ShowEachHotspring';
+import EditHotspring from '../EditHotspring/EditHotspring';
+import HotspringList from '../HotspringList/HotspringList';
 
 
 class HotspringContainer extends Component { 
@@ -13,7 +15,9 @@ class HotspringContainer extends Component {
         newLat: null,
         newLng: null,
     
-        modalShowing: false
+        modalShowing: false,
+
+        chosenPage: null
     }
 }
 
@@ -122,15 +126,19 @@ deleteHotspring = async (id, e) => {
 
 
 
+
 render(){
      console.log(this.state, 'state right now')
      
+
+    //  everything below this displays the list --> trying to move to its own page
         const springList = this.state.hotsprings.map((spring) => {
         return <div>
+          
             <h2>{spring.name} </h2>
             <p>Latitude: {spring.lat} <br></br>
             Longitude: {spring.lng}</p>
-            {/* <button onClick={this.updateHotspring.bind(null, spring._id)}>Edit</button> */}
+            <button onClick={this.props.changePage} id="edit-page">Edit</button>
             <button onClick={this.deleteHotspring.bind(null, spring._id)}>Delete</button>
         </div>
     
@@ -138,7 +146,7 @@ render(){
         return <div className="app">
 
         <MapContainer hotsprings={this.state.hotsprings} mapClick ={this.mapClick} ></MapContainer>
-
+        {/* <HotspringList hotsprings ={this.state.hotsprings} componenentDidMount= {this.componentDidMount} showHotsprings = {this.showHotsprings}> </HotspringList> */}
         {this.state.modalShowing ? 
 
         <CreateHotspring addHotspring={this.addHotspring} newLat = {this.state.newLat} newLng = {this.state.newLng} modalShowing = {this.state.modalShowing} closeModal = {this.closeModal} /> : null}
@@ -149,9 +157,10 @@ render(){
     </div>
 
 
-}
+  }
 
 }
+
 
 
 
