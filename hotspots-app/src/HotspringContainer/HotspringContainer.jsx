@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import HotSpringList from './HotspringList/HotspringList';
 import MapContainer from '../MapContainer/MapContainer'
 import CreateHotspring from '../CreateHotspring/CreateHotspring';
 
@@ -9,26 +8,34 @@ class HotspringContainer extends Component {
     super();
     this.state = {
         hotsprings: [],
+
+        newLat: null,
+        newLng: null,
     
-    modalShowing: false
+        modalShowing: false
     }
 }
 
 
-    mapClick = ({lat, lng, event}) => {
+mapClick = ({lat, lng, event}) => {
         console.log(lat, lng, event)
         console.log('hello')
         this.setState({
-        modalShowing: true
+        
+        modalShowing: true,
+        newLat : lat,
+        newLng : lng
         })
-    }
+}
 
-    componentDidMount(){
+
+componentDidMount(){
     console.log('COMPONENT DID MOUNT');
     this.showHotsprings()
-    }
+}
 
-    showHotsprings = async () => {
+
+showHotsprings = async () => {
 
         const hotspringURL = `http://localhost:9000/hotsprings`
         const result =  await fetch(hotspringURL);  
@@ -43,12 +50,12 @@ class HotspringContainer extends Component {
         this.setState({
         hotsprings: parsedSprings.data
         })
-    }
+}
 
-    addHotspring = async (springs, e) => {
+addHotspring = async (springs) => {
     
-        e.preventDefault();
-        console.log(springs)
+        // e.preventDefault();
+        console.log(springs);
         try {
           const createdHotspring = await fetch('http://localhost:9000/hotsprings', {
             method: 'POST',
@@ -65,10 +72,10 @@ class HotspringContainer extends Component {
         } catch(err){
           console.log(err)
         }
-      }
+}
 
 
-    deleteHotspring = async (id, e) => {
+deleteHotspring = async (id, e) => {
         console.log(id, ' this is id')
         e.preventDefault();
         try {
@@ -84,30 +91,41 @@ class HotspringContainer extends Component {
         } catch(err) {
           console.log(err, ' error')
         }
-      }
+}
 
 
-    render(){
+closeModal = (e) => {
+  this.setState({ modalShowing: false })
+}
+
+render(){
      console.log(this.state, 'state right now')
-        const springList = this.state.hotsprings.map((ss) => {
+     
+        const springList = this.state.hotsprings.map((spring) => {
         return <div>
-            <h2>{ss.name} {ss.lat} {ss.long}</h2>
+            <h2>{spring.name} </h2>
+            <p>Latitude: {spring.lat} <br></br>
+            Longitude: {spring.lng}</p>
             <button>Edit</button>
-            <button onClick={this.deleteHotspring.bind(null, ss._id)}>Delete</button>
+            <button onClick={this.deleteHotspring.bind(null, spring._id)}>Delete</button>
         </div>
     
         })
         return <div className="app">
 
-
         <MapContainer hotsprings={this.state.hotsprings} mapClick ={this.mapClick} ></MapContainer>
-        {this.state.modalShowing ? <CreateHotspring addHotspring={this.addHotspring} /> : null}
+
+        {this.state.modalShowing ? 
+
+        <CreateHotspring addHotspring={this.addHotspring} newLat = {this.state.newLat} newLng = {this.state.newLng} modalShowing = {this.state.modalShowing} closeModal = {this.closeModal} /> : null}
  
         <div className="springContainer">
             {springList}
         </div>
     </div>
-    }
+
+
+}
 
 }
 

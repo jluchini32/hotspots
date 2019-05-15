@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import HotspringContainer from '../HotspringContainer/HotspringContainer';
+import CreateHotspring from '../CreateHotspring/CreateHotspring';
 
 
 const Zebra = ({ text }) => <div>{text}</div>;
@@ -20,12 +21,12 @@ class MapContainer extends Component {
 
 
   render() {
-   
-    const mapSTuff = this.props.hotsprings.map((ss) => {
+   console.log(this.state)
+    const mapSTuff = this.props.hotsprings.map((spring) => {
       return (
            <Zebra
-            lat={ss.lat}
-            lng={ss.long}
+            lat={spring.lat}
+            lng={spring.lng}
             text="HOTSPRING!"
           />
       )
@@ -54,6 +55,8 @@ class MapContainer extends Component {
           /> */}
           
         </GoogleMapReact>
+ 
+        
 
       </div>
     );
