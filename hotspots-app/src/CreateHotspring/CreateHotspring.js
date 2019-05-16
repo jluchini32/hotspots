@@ -17,7 +17,7 @@ class CreateHotspring extends Component {
       this.setState({[e.currentTarget.name]: e.currentTarget.value})
     }
 
-    // closeModal = (e) => {
+    // closeButton = (e) => {
     //   this.setState({ modalShowing: false })
     // }
 
@@ -55,6 +55,8 @@ class CreateHotspring extends Component {
             <input type="text" name="lng" value = {this.state.lng} onChange={this.updateHotspring}/>
           </label>
           <input type='Submit'/>
+          {/* <button onClick = {this.closeButton}>Close</button> */}
+          <button>Close</button>
         </form>
         )
     }

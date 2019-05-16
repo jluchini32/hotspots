@@ -32,11 +32,11 @@ selectEditHotspring = (hotspring) => {
   this.setState({editingHotspring: hotspring})
 }
 
-updateHotspring = async (id, e) => {
-  console.log(1, id);
-  const response = await fetch(`http://localhost:9000/hotsprings/` + this.state.editingHotspring.id, {
+updateHotspring = async (formData, e) => {
+  console.log(1, formData);
+  const response = await fetch(`http://localhost:9000/hotsprings/` + formData.hotspring._id, {
     method: "PUT",
-    body: JSON.stringify(e),
+    body: JSON.stringify(formData.hotspring),
     headers: {
         "Content-Type": "application/json"
     }
@@ -48,7 +48,7 @@ updateHotspring = async (id, e) => {
     console.log("update working")
     this.setState({
         hotsprings: this.state.hotsprings.map((eachSpring)=>{
-  if(eachSpring._id === id){
+  if(eachSpring._id === formData.hotspring._id){
     return updatedHotspring
     }
     return eachSpring
@@ -61,8 +61,8 @@ render() {
 
   return (
     <div className="App"> 
-    <h4>Welcome to the HotSpots App</h4>
-    <button onClick={this.changePage} id="home-page">SHOW ME THE MAP</button>
+    <h4>HotSpots</h4>
+    <button onClick={this.changePage} id="home-page">GO TO MAP</button>
     {/* <button onClick={this.changePage} id="list-page">SHOW ME THE LIST</button> */}
 
     <br></br>

@@ -8,16 +8,31 @@ class EditHotspring extends Component {
       super(props);
   
       this.state = {
-        hotspring: this.props.spring
+        hotspring: {
+          name: "",
+          lat: "",
+          lng: ""
+        }
       }
     }
 
     componentDidMount() {
-      this.state.hotsprings = this.props.hotsprings;
+      console.log(this.props.hotsprings);
+      this.setState({
+        hotspring: this.props.spring
+      })
     }
-    updateLocalState = (e) => {
+    updateLocalState = async (e) => {
       // Computed Properties
-      this.setState({[e.currentTarget.name]: e.currentTarget.value})
+      console.log(e.target.value);
+      await this.setState({
+        hotspring: {
+          ...this.state.hotspring,
+          [e.target.name]: e.target.value
+        }
+      });
+      console.log(this.state);
+        
     }
 
     closeModal = (e) => {
@@ -28,6 +43,7 @@ class EditHotspring extends Component {
 
     render(){
       // first argument on .bind is always the context of this
+      // console.log(this.state);
       return (
 
   
@@ -43,17 +59,17 @@ class EditHotspring extends Component {
         
          <label>
         Name:
-        <input type="text" name="name" value = {this.state.hotspring.name} onChange={this.updateLocalState}/>
+        <input type="text" name="name" value={this.state.hotspring.name} onChange={this.updateLocalState}/>
         </label>
         <br></br>
         <label>
         Latitude:
-        <input type="text" name="lat" value = {this.state.hotspring.lat} onChange={this.updateLocalState}/>
+        <input type="text" name="lat" value={this.state.hotspring.lat} onChange={this.updateLocalState}/>
         </label>
         <br></br>
         <label>
         Longitude:
-        <input type="text" name="lng" value = {this.state.hotspring.lng} onChange={this.updateLocalState}/>
+        <input type="text" name="lng" value={this.state.hotspring.lng} onChange={this.updateLocalState}/>
         </label>
         <input type='Submit'/>
         </form>
