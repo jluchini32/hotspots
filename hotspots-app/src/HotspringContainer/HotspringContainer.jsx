@@ -21,6 +21,9 @@ class HotspringContainer extends Component {
     }
 }
 
+componentDidMount() {
+  this.state.hotsprings = this.props.hotsprings;
+}
 
 mapClick = ({lat, lng, event}) => {
         console.log(lat, lng, event)
@@ -81,29 +84,7 @@ addHotspring = async (springs) => {
         }
 }
 
-updateHotspring = async (id, e) => {
-        const response = await fetch(`http://localhost:9000/hotsprings/` + id, {
-          method: "PUT",
-          body: JSON.stringify(e),
-          headers: {
-              "Content-Type": "application/json"
-          }
-        })
-        const updatedHotspring = await response.json();
-        console.log(updatedHotspring);
 
-        if(response.status === 200){
-          console.log("update working")
-          this.setState({
-              hotsprings: this.state.hotsprings.map((eachSpring)=>{
-        if(eachSpring._id === id){
-          return updatedHotspring
-          }
-          return eachSpring
-          })
-        })
-      }
-}
 
 
 deleteHotspring = async (id, e) => {
@@ -125,8 +106,6 @@ deleteHotspring = async (id, e) => {
 }
 
 
-
-
 render(){
      console.log(this.state, 'state right now')
      
@@ -138,18 +117,25 @@ render(){
             <h2>{spring.name} </h2>
             <p>Latitude: {spring.lat} <br></br>
             Longitude: {spring.lng}</p>
-            <button onClick={this.props.changePage} id="edit-page">Edit</button>
+            <button onClick={(event) => {this.props.changePage(event); this.props.selectEditHotspring(spring)}} id="edit-page" >Edit</button>
             <button onClick={this.deleteHotspring.bind(null, spring._id)}>Delete</button>
         </div>
     
         })
+
+        
         return <div className="app">
 
         <MapContainer hotsprings={this.state.hotsprings} mapClick ={this.mapClick} ></MapContainer>
+        
         {/* <HotspringList hotsprings ={this.state.hotsprings} componenentDidMount= {this.componentDidMount} showHotsprings = {this.showHotsprings}> </HotspringList> */}
         {this.state.modalShowing ? 
 
-        <CreateHotspring addHotspring={this.addHotspring} newLat = {this.state.newLat} newLng = {this.state.newLng} modalShowing = {this.state.modalShowing} closeModal = {this.closeModal} /> : null}
+        <CreateHotspring addHotspring={this.addHotspring} newLat = {this.state.newLat} newLng = {this.state.newLng} modalShowing = {this.state.modalShowing} closeModal = {this.closeModal} /> : null
+        }
+        
+        {/* <EditHotspring updateHotspring= {this.updateHotspring}></EditHotspring> */}
+        
  
         <div className="springContainer">
             {springList}
@@ -157,6 +143,7 @@ render(){
     </div>
 
 
+        
   }
 
 }
