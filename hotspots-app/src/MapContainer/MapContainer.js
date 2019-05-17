@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import HotspringContainer from '../HotspringContainer/HotspringContainer';
 import CreateHotspring from '../CreateHotspring/CreateHotspring';
+import icon from '../firedept.png';
 
-
-const Zebra = ({ text }) => <div>{text}</div>;
+const Zebra = ({ text }) => <div>{text}<img src={icon}></img></div>;
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 
 class MapContainer extends Component {
   static defaultProps = {
     center: {
-      lat: 39.74,
-      lng: -104.99
+      lat: 39.336483976183864,
+      lng: -104.88013671875001
     },
-    zoom: 8
+    zoom: 6.5
 
 
   };
@@ -27,15 +27,17 @@ class MapContainer extends Component {
            <Zebra
             lat={spring.lat}
             lng={spring.lng}
-            text="HOTSPRING!"
+            text={spring.name}
+            icon={"/firedept.png"}
+         
+          
           />
       )
     })
-
     return (
       
       // Important! Always set the container height explicitly
-      <div id ="map-map" style={{ height: '100vh', width: '100%' }}>
+      <div id ="map-map" style={{ height: '90vh', width: '100%' }}>
         <GoogleMapReact
         
         onClick= {this.props.mapClick}

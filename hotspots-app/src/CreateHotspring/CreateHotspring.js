@@ -28,7 +28,8 @@ class CreateHotspring extends Component {
       // first argument on .bind is always the context of this
       return (
   
-        <form onSubmit= {(e) => {
+        <div>
+<form onSubmit= {(e) => {
           e.preventDefault();
           console.log(this.state);
           this.props.addHotspring(this.state);
@@ -54,10 +55,12 @@ class CreateHotspring extends Component {
             Longitude:
             <input type="text" name="lng" value = {this.state.lng} onChange={this.updateHotspring}/>
           </label>
+          <br></br>
           <input type='Submit'/>
-          {/* <button onClick = {this.closeButton}>Close</button> */}
-          <button>Close</button>
         </form>
+        <button onClick={this.props.closeModal}>Close</button>
+        </div>
+        
         )
     }
   }

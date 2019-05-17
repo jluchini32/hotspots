@@ -31,3 +31,29 @@
     transform: rotate(360deg);
   }
 }
+
+
+#root{
+  text-align: center;
+}
+
+
+.springContainer {
+  color:red;
+  color: white;
+  background-color: black;
+  
+}
+
+h2{
+  color: red;
+}
+
+h4{
+  font-family: 'Sigmar One', cursive;
+  font-size: 25px;
+}
+
+p{
+  font-family: 'Sigmar One', cursive;
+}

@@ -65,7 +65,7 @@ render() {
     <button onClick={this.changePage} id="home-page">GO TO MAP</button>
     {/* <button onClick={this.changePage} id="list-page">SHOW ME THE LIST</button> */}
 
-    <br></br>
+ 
 
     {
         this.state.chosenPage === null ?

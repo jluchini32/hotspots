@@ -25,18 +25,30 @@ componentDidMount() {
   this.state.hotsprings = this.props.hotsprings;
 }
 
-mapClick = ({lat, lng, event}) => {
-        console.log(lat, lng, event)
-        console.log('hello')
-        this.setState({
+// mapClick = () => {
+//         console.log(1)
+
         
-        modalShowing: true,
-        newLat : lat,
-        newLng : lng
-        })
+// }
+
+mapClick = ({lat, lng, e}) => {
+  console.log('is this here?', e);
+        if (lat){
+          this.setState({
+              modalShowing: true,
+              newLat : lat,
+              newLng : lng
+            })
+        } else {
+          console.log('map click from button');
+          this.setState({
+            modalShowing: true
+          })
+        }
 }
 
 closeModal = (e) => {
+  console.log('should close', e);
   this.setState({ modalShowing: false })
 }
 
@@ -106,6 +118,8 @@ deleteHotspring = async (id, e) => {
 }
 
 
+
+
 render(){
      console.log(this.state, 'state right now')
      
@@ -122,10 +136,11 @@ render(){
         </div>
     
         })
+        console.log('see it alot', springList);
 
         
         return <div className="app">
-
+          <button onClick = {this.mapClick.bind(null)}>Add a New Spring</button>
         <MapContainer hotsprings={this.state.hotsprings} mapClick ={this.mapClick} ></MapContainer>
         
         {/* <HotspringList hotsprings ={this.state.hotsprings} componenentDidMount= {this.componentDidMount} showHotsprings = {this.showHotsprings}> </HotspringList> */}
@@ -134,9 +149,7 @@ render(){
         <CreateHotspring addHotspring={this.addHotspring} newLat = {this.state.newLat} newLng = {this.state.newLng} modalShowing = {this.state.modalShowing} closeModal = {this.closeModal} /> : null
         }
         
-        {/* <EditHotspring updateHotspring= {this.updateHotspring}></EditHotspring> */}
-        
- 
+      
         <div className="springContainer">
             {springList}
         </div>

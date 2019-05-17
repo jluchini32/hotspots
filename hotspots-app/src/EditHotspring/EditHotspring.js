@@ -54,7 +54,7 @@ class EditHotspring extends Component {
         }
       }
       >
-      <h1>Hello</h1>
+      <h1>Edit Page</h1>
         
         
          <label>
