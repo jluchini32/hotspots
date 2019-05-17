@@ -129,8 +129,8 @@ render(){
         return <div>
           
             <h2>{spring.name} </h2>
-            <p>Latitude: {spring.lat} <br></br>
-            Longitude: {spring.lng}</p>
+            <p><div id="display-color">Latitude:</div> {spring.lat}
+            <div id="display-color">Longitude:</div> {spring.lng}</p>
             <button onClick={(event) => {this.props.changePage(event); this.props.selectEditHotspring(spring)}} id="edit-page" >Edit</button>
             <button onClick={this.deleteHotspring.bind(null, spring._id)}>Delete</button>
         </div>

@@ -52,6 +52,10 @@ h2{
 h4{
   font-family: 'Sigmar One', cursive;
   font-size: 25px;
+  margin: 0;
+}
+h3{
+  margin: 0 0 10px 0;
 }
 
 p{
@@ -62,4 +66,8 @@ button{
   color: red;
   border-color: black;
   background-color: black;
+}
+
+#display-color{
+  color: red;
 }

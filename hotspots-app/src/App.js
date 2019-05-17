@@ -62,6 +62,7 @@ render() {
   return (
     <div className="App"> 
     <h4>HotSpots</h4>
+    <h3>Colorado's First Natural Hot Spring Finder</h3>
     <button onClick={this.changePage} id="home-page">GO TO MAP</button>
     {/* <button onClick={this.changePage} id="list-page">SHOW ME THE LIST</button> */}
 
