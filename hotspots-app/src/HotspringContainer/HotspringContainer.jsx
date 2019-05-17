@@ -139,7 +139,7 @@ render(){
         console.log('see it alot', springList);
 
         
-        return <div className="app">
+        return <div>
           <button onClick = {this.mapClick.bind(null)}>Add a New Spring</button>
         <MapContainer hotsprings={this.state.hotsprings} mapClick ={this.mapClick} ></MapContainer>
         

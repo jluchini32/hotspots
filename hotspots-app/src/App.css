@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color:black;
 }
 
 .App-logo {
@@ -39,23 +40,29 @@
 
 
 .springContainer {
-  color:red;
+  color:#BA122E;
   color: white;
   background-color: black;
   
 }
 
+#map-map{
+  padding: 0 55px 0 55px;
+}
+
 h2{
-  color: red;
+  color: #BA122E;
 }
 
 h4{
   font-family: 'Sigmar One', cursive;
   font-size: 25px;
   margin: 0;
+  color: #BA122E;
 }
 h3{
   margin: 0 0 10px 0;
+  color: #BA122E;
 }
 
 p{
@@ -63,11 +70,12 @@ p{
 }
 
 button{
-  color: red;
-  border-color: black;
+  color: #BA122E;
+  border-color: white;
   background-color: black;
 }
 
 #display-color{
-  color: red;
+  color: #BA122E;
 }
+

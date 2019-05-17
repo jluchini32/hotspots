@@ -37,7 +37,7 @@ class MapContainer extends Component {
     return (
       
       // Important! Always set the container height explicitly
-      <div id ="map-map" style={{ height: '90vh', width: '100%' }}>
+      <div id ="map-map" style={{ height: '90vh' }}>
         <GoogleMapReact
         
         onClick= {this.props.mapClick}
